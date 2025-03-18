@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta name="author" content="Кутаєв Максим">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Каталог процесорів</title>
 </head>
-<body link="blue" vlink="purple" alink="red" bgcolor="lightblue">
+<body>
 
     <h1>Каталог процесорів</h1>
     <p>Тут ви знайдете сучасні процесори для будь-яких потреб.</p>
 
-    <table border="1" width="100%" cellspacing="5" cellpadding="10">
+    <table>
         <caption><b>Порівняння процесорів</b></caption>
 
         <colgroup>
             <col span="1">
             <col span="2">
             <col span="1">
-        </colgroup>
+        </colgroup>        
 
         <tr bgcolor="grey" align="center">
             <th>Модель</th>
@@ -61,7 +62,7 @@
             <td rowspan="2"><b>AMD Ryzen 5 7600X</b><br></td>
             <td>6 / 12</td>
             <td>5.3 ГГц</td>
-            <td rowspan="2" valign="middle">105W</td>
+            <td rowspan="2">105W</td>
         </tr>
         <tr align="center">
             <td colspan="2">Бюджетний варіант для геймерів</td>
@@ -69,10 +70,14 @@
 
     </table>
 
-    <h2>Навігація</h2>
-    <a href="index.html">Повернутися на головну</a>
-    <a href="gpus.html#rtx4090">Дізнатися про RTX 4090</a>
-    <a href="https://www.intel.com/content/www/us/en/homepage.html">Дізнатися про продукцію Intel</a>
+    <div class="navigation">
+        <h2>Навігація</h2>
+        <ul>
+            <li><a href="index.html">Повернутися на головну</a></li>
+            <li><a href="gpus.html#rtx4090">Дізнатися про RTX 4090</a></li>
+            <li><a href="https://www.intel.com/content/www/us/en/homepage.html" >Дізнатися про продукцію Intel</a></li>
+        </ul>
+    </div>
 
 </body>
 </html>
