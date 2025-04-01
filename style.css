@@ -22,7 +22,6 @@ h1 {
 
 h2, h3 {
     font-size: 24px;
-    text-align: left;
 }
 
 /* Стилі для всіх посилань */
@@ -160,4 +159,41 @@ td {
 .navigation a:hover {
     color: #ff6600;
     text-decoration: underline;
+}
+
+/* 4 лаба контекстні, сусідні, дочірні селектори */
+
+/* Центрування блоків з картинками */
+.section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+/* Дочірні селектори */
+/* Стиль для кожного блоку з блоку класу section */
+.section > div {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    width: 250px;
+}
+
+/* контекстні селектори */
+.section img {
+    max-width: 100%;
+    height: 160px;
+}
+
+p b{
+    color: red;
+    font-size: 18px;
+}
+
+/* сусідні селектори */
+h2 + p{
+    font-size: large;
 }
