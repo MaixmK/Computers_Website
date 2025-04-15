@@ -12,7 +12,7 @@
     <p id="pcs">Оберіть один із варіантів готових збірок, що відповідають вашим потребам.</p>
 
     <ul>
-        <li id = "econom"><b>Бюджетний ПК:</b> Оптимальний вибір для домашнього використання та офісних задач.</li>
+        <li id="econom"><b>Бюджетний ПК:</b> Оптимальний вибір для домашнього використання та офісних задач.</li>
         <li id="mid"><b>Середній ПК:</b> Стабільна продуктивність для роботи, геймінгу та мультимедіа.</li>
         <li id="high"><b>Топовий ПК:</b> Максимальна продуктивність для важких професійних задач і 4K-геймінгу.</li>
     </ul>
@@ -34,7 +34,7 @@
         <tr>
             <td><a href="#econom">Детальніше</a></td>
             <td><a href="#mid">Детальніше</a></td>
-            <td><a href="highpc.html" target="info-frame">Детальніше</a></td>
+            <td><a href="#" id="open-frame">Детальніше</a></td>
         </tr>
         <tr>
             <td><b>Характеристики:</b> Intel Core i3, GTX 1650, 16GB RAM</td>
@@ -42,11 +42,15 @@
             <td><b>Характеристики:</b> Core i9-13900K, RTX 4090, 64GB RAM</td>
         </tr>
     </table>
-    
-    <h2>Детальна інформація про збірку</h2>
-    <iframe name="info-frame" src="budget.html" width="50%" height="500px" style="border: 1px solid #ccc;"></iframe>
+
+    <!-- Контейнер для спливаючого фрейму -->
+    <div id="popup-container" style="display: none;">
+        <iframe id="popup-frame" name="info-frame" src="highpc.html" width="50%" height="500px" style="border: 1px solid #ccc;"></iframe>
+        <button id="close-frame">Закрити</button>
+    </div>
+
     <h2>Як обрати пк під ваші потреби</h2>
-    <a href = "#pcs">Детальніше</a>
+    <a href="#pcs">Детальніше</a>
 
     <div class="navigation">
         <h2>Навігація</h2>
@@ -55,5 +59,24 @@
             <li><a href="cpus.html#ryzen9">Дізнатися про Ryzen 9 7950X</a></li>
         </ul>
     </div>
+
+    <!-- JavaScript для відкриття і закриття фрейму -->
+    <script>
+        // Отримуємо елементи
+        const openFrameBtn = document.getElementById("open-frame");
+        const popupContainer = document.getElementById("popup-container");
+        const closeFrameBtn = document.getElementById("close-frame");
+
+        // Додати подію для кнопки відкриття фрейму
+        openFrameBtn.addEventListener("click", function() {
+            popupContainer.style.display = "block"; // Показуємо фрейм
+        });
+
+        // Додати подію для кнопки закриття фрейму
+        closeFrameBtn.addEventListener("click", function() {
+            popupContainer.style.display = "none"; // Ховаємо фрейм
+        });
+    </script>
+
 </body>
 </html>
