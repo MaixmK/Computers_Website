@@ -337,3 +337,42 @@ dl dt:first-child {
     font-style: italic;
     color: purple;
 }
+
+/* Стилі для контейнера кнопки */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+}
+/* Унікальний стиль для кнопки */
+.buttoncss {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Стиль при наведенні */
+.buttoncss {
+    background-color: #45a049;
+    transform: scale(1.1);
+}
+
+/* Стиль при натисканні */
+.buttoncss {
+    background-color: #388e3c;
+    transform: scale(1);
+}
+
+/* Стиль при фокусі (якщо користувач натискає на кнопку або переходить через клавішу Tab) */
+.buttoncss {
+    outline: none; 
+    box-shadow: 0 0 10px rgba(0, 128, 0, 0.6);
+}

@@ -32,9 +32,9 @@
             <td><img src="assets/img/toppc.png" alt="Топовий ПК" width="100"></td>
         </tr>
         <tr>
-            <td><a href="#econom">Детальніше</a></td>
-            <td><a href="#mid">Детальніше</a></td>
-            <td><a href="#" id="open-frame">Детальніше</a></td>
+            <td><a href="#econom" id="econom-link">Детальніше</a></td>
+            <td><a href="#mid" id="mid-link">Детальніше</a></td>
+            <td><a href="#" id="high-link">Детальніше</a></td>
         </tr>
         <tr>
             <td><b>Характеристики:</b> Intel Core i3, GTX 1650, 16GB RAM</td>
@@ -60,19 +60,49 @@
         </ul>
     </div>
 
-    <!-- JavaScript для відкриття і закриття фрейму -->
     <script>
-        // Отримуємо елементи
-        const openFrameBtn = document.getElementById("open-frame");
+        // Функція для підтвердження вибору збірки
+        function confirmSelection(message) {
+            return confirm(message); // Показуємо підтвердження
+        }
+
+        // Вибір для кожного посилання
+        document.getElementById('econom-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            if (confirmSelection("Ви впевнені, що хочете вибрати Бюджетний ПК?")) {
+                alert("Ви вибрали Бюджетний ПК.");
+            } else {
+                alert("Вибір скасовано.");
+            }
+        });
+
+        document.getElementById('mid-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            if (confirmSelection("Ви впевнені, що хочете вибрати Середній ПК?")) {
+                alert("Ви вибрали Середній ПК.");
+            } else {
+                alert("Вибір скасовано.");
+            }
+        });
+
+        document.getElementById('high-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            if (confirmSelection("Ви впевнені, що хочете вибрати Топовий ПК?")) {
+                alert("Ви вибрали Топовий ПК.");
+            } else {
+                alert("Вибір скасовано.");
+            }
+        });
+
+        // Обробка фрейму
+        const openFrameBtn = document.getElementById("high-link");
         const popupContainer = document.getElementById("popup-container");
         const closeFrameBtn = document.getElementById("close-frame");
 
-        // Додати подію для кнопки відкриття фрейму
         openFrameBtn.addEventListener("click", function() {
             popupContainer.style.display = "block"; // Показуємо фрейм
         });
 
-        // Додати подію для кнопки закриття фрейму
         closeFrameBtn.addEventListener("click", function() {
             popupContainer.style.display = "none"; // Ховаємо фрейм
         });

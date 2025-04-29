@@ -79,5 +79,14 @@
         </ul>
     </div>
 
+
+    <script src="dialog.js"></script>
+    <script>
+        // Додаємо обробник подій для кнопки "Додати в кошик"
+        const addToCartButton = document.querySelector(".add-to-cart");
+        addToCartButton.addEventListener("click", function() {
+            dialogWithUser();
+        });
+    </script>
 </body>
 </html>

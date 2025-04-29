@@ -1,18 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="author" content="Кутаєв Максим">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Каталог процесорів</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
     <h1>Каталог процесорів</h1>
     <p>Тут ви знайдете сучасні процесори для будь-яких потреб.</p>
 
-    <table>
+    <!-- Форма для введення даних нового процесора -->
+    <h3>Додати новий процесор</h3>
+    <form id="cpuForm">
+        <label for="model">Модель:</label>
+        <input type="text" id="model" required><br>
+
+        <label for="coresThreads">Ядра / Потоки:</label>
+        <input type="text" id="coresThreads" required><br>
+
+        <label for="frequency">Частота (Boost):</label>
+        <input type="text" id="frequency" required><br>
+
+        <label for="power">Енергоспоживання:</label>
+        <input type="text" id="power" required><br>
+
+        <button type="submit">Додати процесор</button>
+    </form>
+
+    <!-- Кнопка фільтрації за енергоспоживанням -->
+    <button id="filterButton">Показати процесори з енергоспоживанням менше 150W</button>
+
+    <!-- Таблиця для процесорів -->
+    <table id="cpuTable">
         <caption><b>Порівняння процесорів</b></caption>
 
         <colgroup>
@@ -26,48 +52,40 @@
             <th>Ядра / Потоки</th>
             <th>Частота (Boost)</th>
             <th>Енергоспоживання</th>
+            <th>Дії</th>
         </tr>
 
-        <tr align="center">
-            <td rowspan="2"><b>Intel Core i9-13900K</b><br></td>
+        <tr align="center" class="cpuRow">
+            <td><b id="model1">Intel Core i9-13900K</b><br></td>
             <td>24 / 32</td>
             <td>5.8 ГГц</td>
-            <td rowspan="2" valign="middle">125W</td>
-        </tr>
-        <tr align="center">
-            <td colspan="2">Рекомендований для ентузіастів та важких завдань</td>
+            <td>125W</td>
+            <td><button class="deleteBtn">Видалити</button><button class="editBtn">Змінити</button></td>
         </tr>
 
-        <tr align="center">
-            <td rowspan="2"><b>AMD Ryzen 9 7950X</b><br></td>
+        <tr align="center" class="cpuRow">
+            <td><b id="model2">AMD Ryzen 9 7950X</b><br></td>
             <td>16 / 32</td>
             <td>5.7 ГГц</td>
-            <td rowspan="2" valign="middle">170W</td>
-        </tr>
-        <tr align="center">
-            <td colspan="2">Оптимальний для стрімінгу та рендерингу</td>
+            <td>170W</td>
+            <td><button class="deleteBtn">Видалити</button><button class="editBtn">Змінити</button></td>
         </tr>
 
-        <tr align="center">
-            <td rowspan="2"><b>Intel Core i5-13600K</b><br></td>
+        <tr align="center" class="cpuRow">
+            <td><b id="model3">Intel Core i5-13600K</b><br></td>
             <td>14 / 20</td>
             <td>5.1 ГГц</td>
-            <td rowspan="2" valign="middle">125W</td>
-        </tr>
-        <tr align="center">
-            <td colspan="2">Чудовий вибір для геймінгу та продуктивності</td>
+            <td>125W</td>
+            <td><button class="deleteBtn">Видалити</button><button class="editBtn">Змінити</button></td>
         </tr>
 
-        <tr align="center">
-            <td rowspan="2"><b>AMD Ryzen 5 7600X</b><br></td>
+        <tr align="center" class="cpuRow">
+            <td><b id="model4">AMD Ryzen 5 7600X</b><br></td>
             <td>6 / 12</td>
             <td>5.3 ГГц</td>
-            <td rowspan="2">105W</td>
+            <td>105W</td>
+            <td><button class="deleteBtn">Видалити</button><button class="editBtn">Змінити</button></td>
         </tr>
-        <tr align="center">
-            <td colspan="2">Бюджетний варіант для геймерів</td>
-        </tr>
-
     </table>
 
     <div class="navigation">
@@ -75,9 +93,79 @@
         <ul>
             <li><a href="index.html">Повернутися на головну</a></li>
             <li><a href="gpus.html#rtx4090">Дізнатися про RTX 4090</a></li>
-            <li><a href="https://www.intel.com/content/www/us/en/homepage.html" >Дізнатися про продукцію Intel</a></li>
+            <li><a href="https://www.intel.com/content/www/us/en/homepage.html">Дізнатися про продукцію Intel</a></li>
         </ul>
     </div>
+
+    <script>
+        // 1. Фільтруємо процесори з енергоспоживанням менше 150W
+        document.getElementById('filterButton').addEventListener('click', function() {
+            const cpuRows = document.querySelectorAll('.cpuRow');
+            cpuRows.forEach(function(row) {
+                const power = parseInt(row.cells[3].textContent);
+                if (power >= 150) {
+                    row.classList.add('hidden');
+                } else {
+                    row.classList.remove('hidden');
+                }
+            });
+        });
+
+        // 2. Додавання нового процесора через форму
+        document.getElementById('cpuForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const model = document.getElementById('model').value;
+            const coresThreads = document.getElementById('coresThreads').value;
+            const frequency = document.getElementById('frequency').value;
+            const power = document.getElementById('power').value;
+
+            // Створюємо новий рядок для таблиці
+            const newRow = document.createElement('tr');
+            newRow.classList.add('cpuRow');
+            newRow.innerHTML = `
+                <td><b>${model}</b></td>
+                <td>${coresThreads}</td>
+                <td>${frequency}</td>
+                <td>${power}</td>
+                <td><button class="deleteBtn">Видалити</button><button class="editBtn">Змінити</button></td>
+            `;
+
+            // Додаємо новий рядок до таблиці
+            document.getElementById('cpuTable').appendChild(newRow);
+
+            // Очищаємо форму після додавання
+            document.getElementById('cpuForm').reset();
+        });
+
+        // 3. Видалення процесора
+        document.querySelectorAll('.deleteBtn').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const row = this.closest('tr');  // Знаходимо рядок, до якого належить кнопка
+                row.remove();  // Видаляємо цей рядок
+            });
+        });
+
+// 4. Заміна процесора
+document.querySelectorAll('.editBtn').forEach(function(button) {
+    button.addEventListener('click', function() {
+        const row = this.closest('tr');  // Знаходимо рядок, до якого належить кнопка
+        const cells = row.querySelectorAll('td');  // Отримуємо клітинки цього рядка
+        
+        // Додаємо редагування даних процесора через prompt
+        const model = prompt('Змініть модель', cells[0].textContent);
+        const coresThreads = prompt('Змініть ядра/потоки', cells[1].textContent);
+        const frequency = prompt('Змініть частоту', cells[2].textContent);
+        const power = prompt('Змініть енергоспоживання', cells[3].textContent);
+
+        // Заміна значень в клітинках таблиці
+        cells[0].textContent = model;
+        cells[1].textContent = coresThreads;
+        cells[2].textContent = frequency;
+        cells[3].textContent = power;
+    });
+});
+    </script>
 
 </body>
 </html>
