@@ -32,9 +32,9 @@
             <td><img src="assets/img/toppc.png" alt="Топовий ПК" width="100"></td>
         </tr>
         <tr>
-            <td><a href="#econom" id="econom-link">Детальніше</a></td>
-            <td><a href="#mid" id="mid-link">Детальніше</a></td>
-            <td><a href="#" id="high-link">Детальніше</a></td>
+            <td><a href="#econom" id="econom-link" onclick="handleClick('Бюджетний ПК')">Детальніше</a></td>
+            <td><a href="#mid" id="mid-link" onclick="handleClick('Середній ПК')">Детальніше</a></td>
+            <td><a href="#" id="high-link" onclick="handleClick('Топовий ПК')">Детальніше</a></td>
         </tr>
         <tr>
             <td><b>Характеристики:</b> Intel Core i3, GTX 1650, 16GB RAM</td>
@@ -50,7 +50,7 @@
     </div>
 
     <h2>Як обрати пк під ваші потреби</h2>
-    <a href="#pcs">Детальніше</a>
+    <a href="#pcs" id="pcs1">Детальніше</a>
 
     <div class="navigation">
         <h2>Навігація</h2>
@@ -61,39 +61,26 @@
     </div>
 
     <script>
+
+        // Призначення функції-обробника через властивість для елемента з ID 'pcs1'
+        document.getElementById('pcs1').onclick = function() {
+            alert("Повертаємось до опису збірок за вашими потребами");
+        };
+
         // Функція для підтвердження вибору збірки
         function confirmSelection(message) {
-            return confirm(message); // Показуємо підтвердження
+            return confirm(message);
         }
 
-        // Вибір для кожного посилання
-        document.getElementById('econom-link').addEventListener('click', function(event) {
+        // Призначення функції-обробника через атрибут (для одного посилання)
+        function handleClick(pcType) {
             event.preventDefault();
-            if (confirmSelection("Ви впевнені, що хочете вибрати Бюджетний ПК?")) {
-                alert("Ви вибрали Бюджетний ПК.");
+            if (confirmSelection(`Ви впевнені, що хочете вибрати ${pcType}?`)) {
+                alert(`Ви вибрали ${pcType}.`);
             } else {
                 alert("Вибір скасовано.");
             }
-        });
-
-        document.getElementById('mid-link').addEventListener('click', function(event) {
-            event.preventDefault();
-            if (confirmSelection("Ви впевнені, що хочете вибрати Середній ПК?")) {
-                alert("Ви вибрали Середній ПК.");
-            } else {
-                alert("Вибір скасовано.");
-            }
-        });
-
-        document.getElementById('high-link').addEventListener('click', function(event) {
-            event.preventDefault();
-            if (confirmSelection("Ви впевнені, що хочете вибрати Топовий ПК?")) {
-                alert("Ви вибрали Топовий ПК.");
-            } else {
-                alert("Вибір скасовано.");
-            }
-        });
-
+        }
         // Обробка фрейму
         const openFrameBtn = document.getElementById("high-link");
         const popupContainer = document.getElementById("popup-container");

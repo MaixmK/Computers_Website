@@ -64,6 +64,10 @@
     <button class="buttoncss" id="changeBackgroundBtn">Змінити фон</button>
     </div>
     
+    <div class="button-container">
+        <button class="buttoncss" id="removeEventBtn">Видалити обробник події "Змінити фон"</button>
+    </div>
+    
     <script>
         function printDeveloperInfo(surname, name, position = "Web Developer") {
     const info = `Розробник: ${surname} ${name}\nПосада: ${position}`;
@@ -84,14 +88,31 @@
         alert("Обоє рядки однакові за довжиною.");
     }
 }
+        // Створення об'єкта з методом handleEvent
+        const eventHandler = {
+            handleEvent: function(event) {
+                alert(`Обробник спрацював на елементі: ${event.currentTarget.id}`);
+                
+                // Зміна кольору фону на білий
+                document.body.style.backgroundColor = "white";
+                
+                // Повернення до світло-сірого кольору через 30 секунд
+                setTimeout(function() {
+                    document.body.style.backgroundColor = "lightgrey";
+                }, 30000);
+            }
+        };
 
-    document.getElementById('changeBackgroundBtn').addEventListener('click', function() {
-        document.body.style.backgroundColor = "white";
-        setTimeout(function() {
-            document.body.style.backgroundColor = "lightgrey";
-        }, 30000);
-    });
+        // Додавання обробника події до кнопки "Змінити фон"
+        const changeBackgroundButton = document.getElementById('changeBackgroundBtn');
+        changeBackgroundButton.addEventListener('click', eventHandler);
 
+        // Видалення обробника події за допомогою removeEventListener
+        const removeEventButton = document.getElementById('removeEventBtn');
+        removeEventButton.addEventListener('click', function() {
+            changeBackgroundButton.removeEventListener('click', eventHandler);
+            alert('Обробник події був видалений!');
+        });
     </script>
 </body>
 </html>

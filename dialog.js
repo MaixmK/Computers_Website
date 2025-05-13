@@ -1,4 +1,3 @@
-// dialog.js
 function dialogWithUser() {
     let quantity;
     
@@ -6,11 +5,16 @@ function dialogWithUser() {
     do {
         quantity = prompt("Скільки відеокарт ви хочете додати в кошик? Введіть число:");
 
-        // Перевіряємо, чи ввів користувач число більше за 0
-        if (quantity !== null && !isNaN(quantity) && quantity > 0) {
+        if (quantity === null) {
+            alert("Ви скасували введення.");
+            break;
+        }
+
+        if (!isNaN(quantity) && quantity > 0) {
             alert(`Ви додали ${quantity} відеокарт(и) у кошик.`);
-        } else if (quantity !== null) {
+            break;
+        } else {
             alert("Будь ласка, введіть правильну кількість відеокарт.");
         }
-    } while (quantity === null || isNaN(quantity) || quantity <= 0);  // Повторюємо, поки ввід не буде правильним
+    } while (true);
 }

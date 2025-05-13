@@ -18,7 +18,7 @@
             
             Вибір відеокарти залежить від конкретних потреб користувача. Для <span class="gpushighlits">геймерів</span> важливі висока продуктивність, підтримка новітніх технологій, таких як трасування променів та 4K-графіка, а також великий обсяг пам'яті для обробки складних текстур. Для <span class="gpushighlits">професіоналів</span>, що працюють з відеообробкою, рендерингом або науковими розрахунками, важливим критерієм є стабільність роботи при високих навантаженнях та сумісність з професійними програмами. Сьогодні на ринку доступні моделі від різних виробників, таких як <span class="gpushighlits">NVIDIA</span>, <span class="gpushighlits">AMD</span>, які пропонують різні серії відеокарт для кожного сегмента.
         </p>        
-        <img src="assets/img/gpus.png" alt="Відеокарти">
+        <img src="assets/img/gpus.png" alt="Відеокарти" style="width: 85%;">
         <img src="assets/img/gpus1.jpg" alt="Відеокарти" style="width: 85%;">
     </div>
 
@@ -82,10 +82,15 @@
 
     <script src="dialog.js"></script>
     <script>
-        // Додаємо обробник подій для кнопки "Додати в кошик"
-        const addToCartButton = document.querySelector(".add-to-cart");
-        addToCartButton.addEventListener("click", function() {
-            dialogWithUser();
+        // Додаємо обробники подій на всі кнопки "Додати в кошик"
+        const addToCartButtons = document.querySelectorAll(".add-to-cart");
+        addToCartButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                dialogWithUser();
+            });
+            button.addEventListener("click", function() {
+                alert("Перейдіть до кошику, або продовжуйте покупки!");
+            })
         });
     </script>
 </body>

@@ -6,6 +6,12 @@
     <meta name="author" content="Кутаєв Максим">
     <link rel="stylesheet" href="style.css">
     <title>Топовий ПК</title>
+    <style>
+        /* Стиль для підсвічування елемента списку */
+        .highlighted {
+            background-color: rgb(0, 139, 173);
+        }
+    </style>
 </head>
 <body>
 
@@ -13,7 +19,7 @@
     <p><b>Ця збірка ідеальна для 4K-геймінгу, стрімінгу та професійного 3D-моделювання.</b></p>
 
     <h2>Характеристики збірки:</h2>
-    <ol>
+    <ol id="pc-specs">
         <li><b>Процесор:</b> Intel Core i9-13900K (24 ядра, до 5.8 ГГц)</li>
         <li><b>Відеокарта:</b> NVIDIA RTX 4090 24GB GDDR6X</li>
         <li><b>Оперативна пам’ять:</b> 64GB DDR5 6000MHz</li>
@@ -68,16 +74,68 @@
         <dd>Відмінний вибір для роботи з VR та AI-обчисленнями.</dd>
     </dl>
 
+            <!-- Меню з кількома кнопками -->
+    <div id="menu">
+        <button class="menu-button" data-action="showMessage">Показати повідомлення</button>
+        <button class="menu-button" data-action="changeColor">Змінити колір фону</button>
+    </div>
+
     <h2>Орієнтовна ціна: <span style="color: green;">~3500$</span></h2>
+
 
     <div class="button-container">
         <button class="buttoncss" id="redirectBtn">ПК на маркетплейсі</button>
-        </div>
+    </div>
 
     <script>
-    document.getElementById('redirectBtn').addEventListener('click', function() {
-    location.href = "https://hyperditek.com.ua/ru/katalog/protsessor/intel-core-i9-11900/intel-core-i9-11900k/intel-core-i9-12900k/intel-core-i9-13900k";
-});
+        // Обробник події для всього меню
+        document.getElementById('menu').addEventListener('click', function(event) {
+            // Перевіряємо, чи клікнули на кнопку з класом "menu-button"
+            if (event.target && event.target.matches('.menu-button')) {
+                const action = event.target.getAttribute('data-action');
+
+                // Виконуємо відповідну дію в залежності від значення data-action
+                switch(action) {
+                    case 'showMessage':
+                        showMessage();
+                        break;
+                    case 'changeColor':
+                        changeBackgroundColor();
+                        break;
+                    default:
+                        console.log('Невідома дія');
+                }
+            }
+        });
+
+        // Показ повідомлення
+        function showMessage() {
+            alert('Ви переглядаєте Топовий ПК!');
+        }
+
+        // Зміна кольору фону
+        function changeBackgroundColor() {
+            document.body.style.backgroundColor = 'lightyellow';
+        }
+        // Додаємо обробник події для списку
+        const specsList = document.getElementById('pc-specs');
+
+        specsList.addEventListener('click', function(event) {
+            // Перевіряємо, чи клікнули на елемент списку
+            if (event.target.tagName.toLowerCase() === 'li') {
+
+                const items = specsList.querySelectorAll('li');
+                items.forEach(item => item.classList.remove('highlighted'));
+
+                event.target.classList.add('highlighted');
+            }
+        });
+
+        // Обробник події для редиректу
+        document.getElementById('redirectBtn').addEventListener('click', function() {
+            location.href = "https://hyperditek.com.ua/ru/katalog/protsessor/intel-core-i9-11900/intel-core-i9-11900k/intel-core-i9-12900k/intel-core-i9-13900k";
+        });
     </script>
+
 </body>
 </html>
