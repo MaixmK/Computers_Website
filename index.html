@@ -67,15 +67,33 @@
     <div class="button-container">
         <button class="buttoncss" id="removeEventBtn">Видалити обробник події "Змінити фон"</button>
     </div>
-    
+
+     <div class="button-container">
+        <button class="buttoncss" id="toggle-developer-info" data-toggle="developer-info">Показати/Приховати інформацію</button>
+    </div>
+
+    <div id="developer-info" data-visible="true">
+        <h3>Розробник: Кутаєв Максим</h3>
+        <p>Посада: Web Developer</p>
+    </div>
+
     <script>
+        document.getElementById('toggle-developer-info').addEventListener('click', function(event) {
+            const targetId = event.currentTarget.dataset.toggle;
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                const currentlyVisible = targetElement.getAttribute('data-visible') === 'true';
+                targetElement.style.display = currentlyVisible ? 'none' : 'block';
+                targetElement.setAttribute('data-visible', !currentlyVisible);
+            }
+        });
+
         function printDeveloperInfo(surname, name, position = "Web Developer") {
     const info = `Розробник: ${surname} ${name}\nПосада: ${position}`;
     
     alert(info);
         }
-
-
         function compareStrings() {
     const str1 = prompt("Введіть перший рядок:");
     const str2 = prompt("Введіть другий рядок:");
@@ -88,31 +106,50 @@
         alert("Обоє рядки однакові за довжиною.");
     }
 }
-        // Створення об'єкта з методом handleEvent
-        const eventHandler = {
+
+        let eventHandler = {
             handleEvent: function(event) {
                 alert(`Обробник спрацював на елементі: ${event.currentTarget.id}`);
-                
-                // Зміна кольору фону на білий
+
                 document.body.style.backgroundColor = "white";
-                
-                // Повернення до світло-сірого кольору через 30 секунд
+
                 setTimeout(function() {
                     document.body.style.backgroundColor = "lightgrey";
                 }, 30000);
             }
         };
 
-        // Додавання обробника події до кнопки "Змінити фон"
+
         const changeBackgroundButton = document.getElementById('changeBackgroundBtn');
         changeBackgroundButton.addEventListener('click', eventHandler);
 
-        // Видалення обробника події за допомогою removeEventListener
         const removeEventButton = document.getElementById('removeEventBtn');
         removeEventButton.addEventListener('click', function() {
             changeBackgroundButton.removeEventListener('click', eventHandler);
             alert('Обробник події був видалений!');
         });
+
+
+
+        const blocks = document.querySelectorAll('.section > div');
+
+        blocks.forEach(block => {
+        block.addEventListener('mouseover', (event) => {
+            event.currentTarget.style.backgroundColor = '#d0ebff';
+            event.currentTarget.style.border = '2px solid #339af0';
+            event.currentTarget.style.borderRadius = '8px';
+            event.currentTarget.style.transition = 'all 0.3s ease';
+        });
+
+        block.addEventListener('mouseout', (event) => {
+            if (!event.relatedTarget || !event.currentTarget.contains(event.relatedTarget)) {
+            event.currentTarget.style.backgroundColor = '';
+            event.currentTarget.style.border = '';
+            event.currentTarget.style.borderRadius = '';
+            }
+        });
+        });
+
     </script>
 </body>
 </html>

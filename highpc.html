@@ -74,7 +74,6 @@
         <dd>Відмінний вибір для роботи з VR та AI-обчисленнями.</dd>
     </dl>
 
-            <!-- Меню з кількома кнопками -->
     <div id="menu">
         <button class="menu-button" data-action="showMessage">Показати повідомлення</button>
         <button class="menu-button" data-action="changeColor">Змінити колір фону</button>
@@ -88,13 +87,10 @@
     </div>
 
     <script>
-        // Обробник події для всього меню
         document.getElementById('menu').addEventListener('click', function(event) {
-            // Перевіряємо, чи клікнули на кнопку з класом "menu-button"
             if (event.target && event.target.matches('.menu-button')) {
                 const action = event.target.getAttribute('data-action');
 
-                // Виконуємо відповідну дію в залежності від значення data-action
                 switch(action) {
                     case 'showMessage':
                         showMessage();

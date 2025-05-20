@@ -11,7 +11,7 @@
     <h1>Готові збірки ПК</h1>
     <p id="pcs">Оберіть один із варіантів готових збірок, що відповідають вашим потребам.</p>
 
-    <ul>
+    <ul id="pcslist">
         <li id="econom"><b>Бюджетний ПК:</b> Оптимальний вибір для домашнього використання та офісних задач.</li>
         <li id="mid"><b>Середній ПК:</b> Стабільна продуктивність для роботи, геймінгу та мультимедіа.</li>
         <li id="high"><b>Топовий ПК:</b> Максимальна продуктивність для важких професійних задач і 4K-геймінгу.</li>
@@ -60,19 +60,20 @@
         </ul>
     </div>
 
+    <div id="dropZone" style="margin-top:20px; padding:10px; border: 2px dashed #339af0; min-height: 50px;">
+    <h3>Ваша вибрана збірка:</h3>
+    </div>
     <script>
 
-        // Призначення функції-обробника через властивість для елемента з ID 'pcs1'
         document.getElementById('pcs1').onclick = function() {
             alert("Повертаємось до опису збірок за вашими потребами");
         };
 
-        // Функція для підтвердження вибору збірки
+
         function confirmSelection(message) {
             return confirm(message);
         }
 
-        // Призначення функції-обробника через атрибут (для одного посилання)
         function handleClick(pcType) {
             event.preventDefault();
             if (confirmSelection(`Ви впевнені, що хочете вибрати ${pcType}?`)) {
@@ -93,7 +94,68 @@
         closeFrameBtn.addEventListener("click", function() {
             popupContainer.style.display = "none"; // Ховаємо фрейм
         });
+
+
+
+    const pcsListItems = document.querySelectorAll('ul#pcslist li');
+    const dropZone = document.getElementById('dropZone');
+
+    pcsListItems.forEach(item => {
+        item.style.cursor = 'grab';
+        
+        item.onmousedown = function(event) {
+        event.preventDefault();
+
+        const shiftX = event.clientX - item.getBoundingClientRect().left;
+        const shiftY = event.clientY - item.getBoundingClientRect().top;
+
+        item.style.position = 'absolute';
+        item.style.zIndex = 1000;
+        document.body.append(item);
+
+        function moveAt(pageX, pageY) {
+            item.style.left = pageX - shiftX + 'px';
+            item.style.top = pageY - shiftY + 'px';
+        }
+
+        moveAt(event.pageX, event.pageY);
+
+        function onMouseMove(event) {
+            moveAt(event.pageX, event.pageY);
+        }
+
+        document.addEventListener('mousemove', onMouseMove);
+
+        item.onmouseup = function() {
+            document.removeEventListener('mousemove', onMouseMove);
+            item.onmouseup = null;
+
+            const dropRect = dropZone.getBoundingClientRect();
+            if (event.clientX >= dropRect.left && event.clientX <= dropRect.right &&
+                event.clientY >= dropRect.top && event.clientY <= dropRect.bottom) {
+            
+                    dropZone.appendChild(item);
+            item.style.position = 'static';
+            item.style.left = '';
+            item.style.top = '';
+            item.style.zIndex = '';
+            alert(`Ви додали "${item.textContent.trim()}" до вибраних збірок.`);
+            } else {
+            item.style.position = 'static';
+            item.style.left = '';
+            item.style.top = '';
+            item.style.zIndex = '';
+            }
+        };
+        };
+
+        item.ondragstart = function() {
+        return false;
+        };
+    });
     </script>
+
+
 
 </body>
 </html>

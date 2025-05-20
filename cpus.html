@@ -84,24 +84,29 @@
     </div>
 
     <script>
-        // Делегування подій
         document.addEventListener('click', function(event) {
             const action = event.target.dataset.action;
 
-            // Якщо у елемента є атрибут data-action, виконуємо відповідну дію
             if (action) {
-                if (action === 'add') {
-                    // Додаємо новий процесор
-                    addNewCpu();
-                } else if (action === 'filter') {
-                    // Фільтруємо процесори
-                    filterCpus();
-                } else if (action === 'delete') {
-                    // Видаляємо процесор
-                    deleteCpu(event.target);
-                } else if (action === 'edit') {
-                    // Редагуємо процесор
-                    editCpu(event.target);
+                switch(action) {
+                    case 'add':
+                        addNewCpu();
+                        break;
+
+                    case 'filter':
+                        filterCpus();
+                        break;
+
+                    case 'delete':
+                        deleteCpu(event.target);
+                        break;
+
+                    case 'edit':
+                        editCpu(event.target);
+                        break;
+
+                    default:
+                        console.log('Невідома дія');
                 }
             }
         });
